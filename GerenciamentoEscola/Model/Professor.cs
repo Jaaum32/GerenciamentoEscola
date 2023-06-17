@@ -12,6 +12,7 @@ public class Professor
     public int NumMatricula { get; set; }
     public string Nome { get; set; }
     public string Ingresso { get; set; }
+    public List<Turma> Turmas { get; set; }
 
 }
 

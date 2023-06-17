@@ -9,4 +9,5 @@ public class Materia
     
     public string Nome { get; set; }
     public int CargaHorario { get; set; }
-}
+    public List<Curso> Cursos { get; set; }
+ }

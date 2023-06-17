@@ -12,4 +12,6 @@ public class HoraAula
     public int Horario { get; set; }
     public string HoraInicio { get; set; }
     public string HoraFim { get; set; }
+    
+    public List<Turma> Turmas { get; set; }
 }

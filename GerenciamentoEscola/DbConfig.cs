@@ -9,9 +9,10 @@ public class ApplicationDbContext : DbContext
     public DbSet<Turma> Turmas { get; set; }
     public DbSet<HoraAula> HoraAulas { get; set; }
     public DbSet<Sala> Salas { get; set; }
+    public DbSet<Curso> Cursos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySQL("Data Source=gerenciamentoescola.db");
+        optionsBuilder.UseMySQL("Server=localhost; Database=gerenciamentoescola; User id=root; Password=0406");
     }
 }

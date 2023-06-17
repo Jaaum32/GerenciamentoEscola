@@ -10,6 +10,6 @@ public class Turma
     public Materia Materia { get; set; }
     public Professor Professor { get; set; }
     public List<Aluno> Alunos { get; set; }
-    public Sala Sala { get; set; }
+  //  public Sala Sala { get; set; }
     public List<HoraAula> HoraAulas { get; set; }
 }
