@@ -1,6 +1,9 @@
+using GerenciamentoEscola.Interfaces;
+using GerenciamentoEscola.Model;
+
 namespace GerenciamentoEscola.Controller;
 
-public class CHoraAula
+public class CHoraAula : Repository<HoraAula>, IHoraAula
 {
     
 }

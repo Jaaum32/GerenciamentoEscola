@@ -1,6 +1,6 @@
 namespace GerenciamentoEscola.Interfaces;
 
-public class ICurso
+public interface ICurso
 {
     
 }

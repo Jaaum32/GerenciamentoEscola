@@ -4,6 +4,17 @@ namespace GerenciamentoEscola.Model;
 
 public class Curso
 {
+    public override string ToString()
+    {
+        return "Id: " + Id +
+               "Nome: " + Nome +
+               "Turno: " + Turno;
+    }
+
+    public Curso()
+    {
+    }
+
     public Curso(int? id, string nome, string turno)
     {
         Id = id;
@@ -16,7 +27,7 @@ public class Curso
     
     public string Nome { get; set; }
     public string Turno { get; set; }
-    public List<Materia>? Materias { get; set; }
+    public IEnumerable<CursoMateria>? Materias { get; set; }
 
 
 }

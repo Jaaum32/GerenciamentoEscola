@@ -33,4 +33,15 @@ public class Repository<T> : IRepository<T> where T : class
         Context.Set<T>().Remove(entity);
         Context.SaveChanges();
     }
+    
+    public List<T> ListarPorParametros(string table, string column, string dado)
+    {
+        List<T> a = Context.Set<T>()
+            .FromSqlRaw($"SELECT * FROM {table} Where {column} =  '{dado}'")
+            .ToList();
+        
+        return a;
+    }
+    
+    
 }

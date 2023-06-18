@@ -9,6 +9,10 @@ public class Sala
         return "Id: " + Id + "\nLocalização: " + Localizacao;
     }
 
+    public Sala()
+    {
+    }
+
     public Sala(int? id, string localizacao)
     {
         Id = id;
