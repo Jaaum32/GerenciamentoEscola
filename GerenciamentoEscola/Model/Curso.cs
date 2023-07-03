@@ -7,8 +7,8 @@ public class Curso
     public override string ToString()
     {
         return "Id: " + Id +
-               "Nome: " + Nome +
-               "Turno: " + Turno;
+               "\nNome: " + Nome +
+               "\nTurno: " + Turno;
     }
 
     public Curso()

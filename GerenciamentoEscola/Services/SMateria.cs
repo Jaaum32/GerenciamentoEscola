@@ -28,11 +28,27 @@ namespace GerenciamentoEscola.Services
 
         public void Atualizar()
         {
-            Console.WriteLine("DIGITE O ID DA MATERIA A SER ALTERADA: ");
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
+            
             int id;
-            while (!int.TryParse(Console.ReadLine(), out id))
+            while (true)
             {
-                Console.WriteLine("ID inválido. Digite um valor inteiro:");
+                Console.WriteLine("DIGITE O ID DA MATERIA A SER ALTERADA: ");
+                while (!int.TryParse(Console.ReadLine(), out id))
+                {
+                    Console.WriteLine("Id inválido. Digite um valor inteiro:");
+                }
+
+                Materia mat = _rm.ObterPorId(id);
+                if (mat != null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Materia não encontrado com o ID especificado.");
+                }
             }
 
             Console.WriteLine("--== DIGITE OS NOVOS DADOS DA MATERIA: ==--");
@@ -48,11 +64,14 @@ namespace GerenciamentoEscola.Services
 
             Materia materia = new Materia(id, nome, carga);
 
-            _rm.Atualizar(materia);
+            _rm.Atualizar(id, materia);
         }
 
         public void Excluir()
         {
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
+            
             Console.WriteLine("DIGITE O ID DA MATERIA A SER DELETADA: ");
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))

@@ -4,21 +4,14 @@ namespace GerenciamentoEscola.Model;
 
 public class HoraAula
 {
-    public void ListarTurmas()
-    {
-        foreach (var t in Turmas)
-        {
-            t.ToString();
-        }
-    }
     public override string ToString()
     {
         return "Id: " + Id +
-               "Dia da Semana: " + DiaSemana +
-               "Turno: " + Turno +
-               "Horario: " + Horario +
-               "Hora de Inicio: " + HoraInicio +
-               "Hora de Fim: " + HoraFim;
+               "\nDia da Semana: " + DiaSemana +
+               "\nTurno: " + Turno +
+               "\nHorario: " + Horario +
+               "\nHora de Inicio: " + HoraInicio +
+               "\nHora de Fim: " + HoraFim;
     }
 
     public HoraAula()

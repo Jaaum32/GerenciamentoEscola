@@ -25,11 +25,28 @@ namespace GerenciamentoEscola.Services
 
         public void Atualizar()
         {
-            Console.WriteLine("DIGITE O ID DO CURSO A SER ALTERADO: ");
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
+            
             int id;
-            while (!int.TryParse(Console.ReadLine(), out id))
+            while (true)
             {
-                Console.WriteLine("ID inválido. Digite um valor inteiro:");
+                
+                Console.WriteLine("DIGITE O ID DO CURSO A SER ALTERADO: ");
+                while (!int.TryParse(Console.ReadLine(), out id))
+                {
+                    Console.WriteLine("Id inválido. Digite um valor inteiro:");
+                }
+
+                Curso cr = _rc.ObterPorId(id);
+                if (cr != null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Curso não encontrado com o ID especificado.");
+                }
             }
 
             Console.WriteLine("--== DIGITE OS NOVOS DADOS DO CURSO: ==--");
@@ -41,11 +58,14 @@ namespace GerenciamentoEscola.Services
 
             Curso curso = new Curso(id, nome, cargaHoraria);
 
-            _rc.Atualizar(curso);
+            _rc.Atualizar(id, curso);
         }
 
         public void Excluir()
         {
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
+            
             Console.WriteLine("DIGITE O ID DO CURSO A SER DELETADO: ");
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))
@@ -95,24 +115,13 @@ namespace GerenciamentoEscola.Services
                 foreach (var curso in cursos)
                 {
                     Console.WriteLine(curso.ToString());
+                    Console.WriteLine();
                 }
             }
             else
             {
                 Console.WriteLine("Nenhum curso encontrado.");
             }
-        }
-        
-        public void ImprimirMatrizCurricular()
-        {
-            Console.WriteLine("DIGITE O ID DO CURSO A SER ALTERADO: ");
-            int id;
-            while (!int.TryParse(Console.ReadLine(), out id))
-            {
-                Console.WriteLine("ID inválido. Digite um valor inteiro:");
-            }
-            
-            
         }
     }
 }

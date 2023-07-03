@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using GerenciamentoEscola.Controller;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
@@ -6,14 +7,26 @@ namespace GerenciamentoEscola.Model;
 
 public class Professor
 {
-    public void ListarTurmas()
-    {
-        foreach (var t in Turmas)
-        {
-            t.ToString();
-        }
-    }
+    
+    private readonly CTurma _rt = new CTurma();
     public override string ToString()
+    {
+        List<Turma> turmas = _rt.ListarPorParametros("Turmas", "ProfessorId", this.Id.ToString());
+        string aux = "";
+        
+        foreach (var t in turmas)
+        {
+            aux += t.ToStringProf();
+        }
+        
+        return "Id: " + Id +
+               "\nNumero Matricula: " + NumMatricula +
+               "\nNome: " + Nome +
+               "\nIngresso: " + Ingresso +
+               "\nTurmas: [ " + aux + "]";
+    }
+
+    public string ToStringTurma()
     {
         return "Id: " + Id +
                "\nNumero Matricula: " + NumMatricula +

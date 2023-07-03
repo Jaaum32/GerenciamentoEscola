@@ -1,22 +1,39 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using GerenciamentoEscola.Controller;
 
 namespace GerenciamentoEscola.Model;
 
 public class Turma
 {
+    
+    private readonly CMateria _rm = new CMateria();
+    private readonly CProfessor _rp = new CProfessor();
+    
     public override string ToString()
     {
+        Materia materia = _rm.ObterPorId(MateriaId);
+        Professor professor = _rp.ObterPorId(ProfessorId);
+
         return "Id: " + Id +
-               "Id da Materia: " + MateriaId +
-               "Id da Professor: " + ProfessorId;
+               "\nMateria:\n[" + materia.ToString() + "]" +
+               "\nProfessor:\n[" + professor.ToStringTurma() + "]";
+    }
+
+    public string ToStringProf()
+    {
+        Materia materia = _rm.ObterPorId(MateriaId);
+        
+        return "Id: " + Id +
+               "\nMateria:\n[" + materia.ToString() + "]";
+
     }
 
     public Turma()
     {
     }
 
-    public Turma(int? id, int? materiaId, int? professorId)
+    public Turma(int? id, int materiaId, int professorId)
     {
         Id = id;
         MateriaId = materiaId;
@@ -26,11 +43,11 @@ public class Turma
     [Key]
     public int? Id { get; set; }
     
-    public int? MateriaId { get; set; }
+    public int MateriaId { get; set; }
     [ForeignKey("MateriaId")]
     public Materia Materia { get; set; }
 
-    public int? ProfessorId { get; set; }
+    public int ProfessorId { get; set; }
     [ForeignKey("ProfessorId")]
     public Professor Professor { get; set; }
     

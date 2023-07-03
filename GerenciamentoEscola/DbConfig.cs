@@ -25,13 +25,13 @@ public class ApplicationDbContext : DbContext
             .HasKey(m => new { m.MateriaId, m.CursoId });
 
         modelBuilder.Entity<CursoMateria>()
-            .HasOne(m => m.Curso)
-            .WithMany(a => a.Materias)
-            .HasForeignKey(m => m.CursoId);
+            .HasOne(m => m.Materia)
+            .WithMany(a => a.Cursos)
+            .HasForeignKey(m => m.MateriaId);
 
         modelBuilder.Entity<CursoMateria>()
-            .HasOne(m => m.Materia)
-            .WithMany(d => d.Cursos)
+            .HasOne(m => m.Curso)
+            .WithMany(d => d.Materias)
             .HasForeignKey(m => m.CursoId);
         
         modelBuilder.Entity<AlunoTurma>()
@@ -40,12 +40,12 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<AlunoTurma>()
             .HasOne(m => m.Aluno)
             .WithMany(a => a.Turmas)
-            .HasForeignKey(m => m.TurmaId);
+            .HasForeignKey(m => m.AlunoId);
 
         modelBuilder.Entity<AlunoTurma>()
             .HasOne(m => m.Turma)
             .WithMany(d => d.Alunos)
-            .HasForeignKey(m => m.AlunoId);
+            .HasForeignKey(m => m.TurmaId);
         
         modelBuilder.Entity<HoraAulaTurma>()
             .HasKey(m => new { m.HoraAulaId, m.TurmaId });
@@ -53,12 +53,12 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<HoraAulaTurma>()
             .HasOne(m => m.HoraAula)
             .WithMany(a => a.Turmas)
-            .HasForeignKey(m => m.TurmaId);
+            .HasForeignKey(m => m.HoraAulaId);
 
         modelBuilder.Entity<HoraAulaTurma>()
             .HasOne(m => m.Turma)
             .WithMany(d => d.HoraAulas)
-            .HasForeignKey(m => m.HoraAulaId);
+            .HasForeignKey(m => m.TurmaId);
         
 
         // outras configurações

@@ -21,11 +21,27 @@ namespace GerenciamentoEscola.Services
 
         public void Atualizar()
         {
-            Console.WriteLine("DIGITE O ID DA SALA A SER ALTERADA: ");
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
+            
             int id;
-            while (!int.TryParse(Console.ReadLine(), out id))
+            while (true)
             {
-                Console.WriteLine("ID inválido. Digite um valor inteiro:");
+                Console.WriteLine("DIGITE O ID DA SALA A SER ALTERADO:");
+                while (!int.TryParse(Console.ReadLine(), out id))
+                {
+                    Console.WriteLine("Id inválido. Digite um valor inteiro:");
+                }
+
+                Sala sl = _rs.ObterPorId(id);
+                if (sl != null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Sala não encontrado com o ID especificado.");
+                }
             }
 
             Console.WriteLine("--== DIGITE OS NOVOS DADOS DA SALA: ==--");
@@ -34,11 +50,14 @@ namespace GerenciamentoEscola.Services
 
             Sala sala = new Sala(id, locate);
 
-            _rs.Atualizar(sala);
+            _rs.Atualizar(id, sala);
         }
 
         public void Excluir()
         {
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
+            
             Console.WriteLine("DIGITE O ID DA SALA A SER DELETADA: ");
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))
@@ -57,7 +76,6 @@ namespace GerenciamentoEscola.Services
                 Console.WriteLine("Sala não encontrada com o ID especificado.");
             }
         }
-
         public void ObterPorId()
         {
             Console.WriteLine("DIGITE O ID DA SALA A SER IMPRESSA: ");

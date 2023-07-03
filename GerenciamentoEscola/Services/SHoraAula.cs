@@ -35,11 +35,26 @@ namespace GerenciamentoEscola.Services
 
         public void Atualizar()
         {
-            Console.WriteLine("DIGITE O ID DA HORA AULA A SER ALTERADA: ");
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
             int id;
-            while (!int.TryParse(Console.ReadLine(), out id))
+            while (true)
             {
-                Console.WriteLine("ID inválido. Digite um valor inteiro:");
+                Console.WriteLine("DIGITE O ID DA HORA AULA A SER ALTERADA: ");
+                while (!int.TryParse(Console.ReadLine(), out id))
+                {
+                    Console.WriteLine("Id inválido. Digite um valor inteiro:");
+                }
+
+                HoraAula ha = _rha.ObterPorId(id);
+                if (ha != null)
+                {
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Hora aula não encontrado com o ID especificado.");
+                }
             }
 
             Console.WriteLine("--== DIGITE OS NOVOS DADOS DA HORA AULA: ==--");
@@ -62,11 +77,14 @@ namespace GerenciamentoEscola.Services
 
             HoraAula horaAula = new HoraAula(id, diaSemana, turno, horario);
 
-            _rha.Atualizar(horaAula);
+            _rha.Atualizar(id, horaAula);
         }
 
         public void Excluir()
         {
+            Console.WriteLine("Opções: \n");
+            ObterTodos();
+            
             Console.WriteLine("DIGITE O ID DA HORA AULA A SER DELETADA: ");
             int id;
             while (!int.TryParse(Console.ReadLine(), out id))
@@ -116,6 +134,7 @@ namespace GerenciamentoEscola.Services
                 foreach (var h in horasAula)
                 {
                     Console.WriteLine(h.ToString());
+                    Console.WriteLine();
                 }
             }
             else

@@ -21,10 +21,14 @@ public class Repository<T> : IRepository<T> where T : class
         Context.SaveChanges();
     }
 
-    public void Atualizar(T entity)
+    public void Atualizar(T entidade)
     {
-        Context.Set<T>().Attach(entity);
-        Context.Entry(entity).State = EntityState.Modified;
+        throw new NotImplementedException();
+    }
+
+    public void Atualizar(int id, T entity)
+    {
+        Context.Entry(Context.Set<T>().Find(id)).CurrentValues.SetValues(entity);
         Context.SaveChanges();
     }
 
@@ -34,7 +38,7 @@ public class Repository<T> : IRepository<T> where T : class
         Context.SaveChanges();
     }
     
-    public List<T> ListarPorParametros(string table, string column, string dado)
+    public List<T> ListarPorParametros(string table, string column, string? dado)
     {
         List<T> a = Context.Set<T>()
             .FromSqlRaw($"SELECT * FROM {table} Where {column} =  '{dado}'")

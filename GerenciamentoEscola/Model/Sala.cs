@@ -6,7 +6,8 @@ public class Sala
 {
     public override string ToString()
     {
-        return "Id: " + Id + "\nLocalização: " + Localizacao;
+        return "Id: " + Id + 
+               "\nLocalização: " + Localizacao;
     }
 
     public Sala()
