@@ -1,37 +1,30 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Google.Protobuf.WellKnownTypes;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using GerenciamentoEscola.Controller;
 
 namespace GerenciamentoEscola.Model;
 
 public class Aluno
 {
-    public void ListarTurmas()
-    {
-        foreach (var t in Turmas)
-        {
-            t.ToString();
-        }
-    }
+    private readonly CCurso _rc = new CCurso();
     public override string ToString()
     {
+        Curso curso = _rc.ObterPorId(CursoId);
+        
         return "Id: " + Id +
                "\nNumero Matricula: " + NumMatricula +
                "\nNome: " + Nome +
                "\nIngresso: " + Ingresso +
                "\nPeriodo: " + Periodo +
-               "\nCoeficiente: " + Coeficiente +
                "\nSituacao: " + Situacao +
-               "\nCurso: " + Curso;
+               "\nCurso:\n[" + curso.ToString() + "]"; 
     }
 
     public Aluno()
     {
     }
 
-    public Aluno(int? id, int numMatricula, string nome, string ingresso, int periodo, string situacao, int? curso)
+    public Aluno(int? id, int numMatricula, string nome, string ingresso, int periodo, string situacao, int curso)
     {
         Id = id;
         NumMatricula = numMatricula;
@@ -40,6 +33,12 @@ public class Aluno
         Periodo = periodo;
         Situacao = situacao;
         CursoId = curso;
+    }
+
+    public Aluno(int? id, double coeficiente)
+    {
+        Id = id;
+        Coeficiente = coeficiente;
     }
 
     [Key]
@@ -53,7 +52,7 @@ public class Aluno
     public string Situacao { get; set; }
     public IEnumerable<AlunoTurma>? Turmas { get; set; }
     
-    public int? CursoId { get; set; }
+    public int CursoId { get; set; }
     
     [ForeignKey("CursoId")]
     public Curso Curso { get; set; }
